@@ -1,5 +1,5 @@
 import type { ClientEvents, PermissionResolvable } from 'discord.js';
-import type { CommandType, PermissionConfig, SelectType } from './types.js';
+import type { CommandType, FieldStyle, PermissionConfig, SelectType } from './types.js';
 
 /**
  * Descriptor for a single command argument. Slash commands map these directly
@@ -54,27 +54,63 @@ export interface ButtonDescriptor<TParams = Record<string, string>> {
 }
 
 /** Dropdown (select menu) component descriptor. */
-export interface DropdownDescriptor {
+export interface DropdownDescriptor<TParams = Record<string, string>> {
   customId: string;
+  /** Declared custom-id params, packed/decoded by the codec into `args`. */
+  params: string[];
   selectType: SelectType;
   permissions?: PermissionConfig;
-  execute?: (interaction: unknown, values: unknown[]) => Promise<void>;
+  execute?: (interaction: unknown, args: TParams, values: unknown[]) => Promise<void>;
+}
+
+/** Option for a choice-based modal field (string select / radio group). */
+export interface ModalChoiceOption {
+  label: string;
+  value: string;
+  description?: string;
+  default?: boolean;
 }
 
 /**
- * Modal field kinds supported by the modal builder (Phase 3). The full
- * {@link ModalFieldDescriptor} shape is finalized alongside the builder; here
- * it is referenced loosely so the client can store modal descriptors early.
+ * Modal field kinds supported by the modal builder. Mapped to discord.js v2
+ * modal components: `field` → TextInput, `textDisplay` → TextDisplay,
+ * `stringSelect` → StringSelectMenu, `radioGroup` → RadioGroup,
+ * `imageUpload` → FileUpload.
  */
 export type ModalFieldKind =
-  'text' | 'textDisplay' | 'stringSelect' | 'radio' | 'imageUpload' | 'field';
+  'field' | 'textDisplay' | 'stringSelect' | 'radioGroup' | 'imageUpload';
 
-export interface ModalDescriptor<TFields = Record<string, unknown>> {
+/** Full descriptor for a single modal field. */
+export interface ModalFieldDescriptor {
+  name: string;
+  kind: ModalFieldKind;
+  label?: string;
+  description?: string;
+  required?: boolean;
+  // text input (field):
+  style?: FieldStyle;
+  minLength?: number;
+  maxLength?: number;
+  placeholder?: string;
+  value?: string;
+  // string select / radio group:
+  options?: ModalChoiceOption[];
+  minValues?: number;
+  maxValues?: number;
+  // text display:
+  content?: string;
+}
+
+export interface ModalDescriptor<
+  TParams = Record<string, string>,
+  TFields = Record<string, unknown>,
+> {
   customId: string;
+  params: string[];
   title?: string;
-  fields: unknown[];
+  fields: ModalFieldDescriptor[];
   permissions?: PermissionConfig;
-  execute?: (interaction: unknown, fields: TFields) => Promise<void>;
+  execute?: (interaction: unknown, args: TParams, fields: TFields) => Promise<void>;
 }
 
 /** Discord event listener descriptor. */
