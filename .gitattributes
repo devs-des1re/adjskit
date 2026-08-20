@@ -1,0 +1,13 @@
+# Normalize all text files to LF in the repo regardless of OS.
+* text=auto eol=lf
+
+# Ensure these stay LF (Prettier endOfLine: lf).
+*.{ts,tsx,js,jsx,mjs,cjs,json,jsonc,md,mdx,yml,yaml} text eol=lf
+
+# Binary files.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
