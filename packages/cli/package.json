@@ -1,0 +1,31 @@
+{
+  "name": "adjskit",
+  "version": "0.0.0",
+  "description": "CLI to scaffold and manage discord.js bot projects built on @adjskit/core.",
+  "type": "module",
+  "bin": {
+    "adjskit": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@adjskit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.0.0"
+  }
+}
