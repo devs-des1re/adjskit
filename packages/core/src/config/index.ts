@@ -138,6 +138,11 @@ export const defaultMessages = {
   mentionableNotFound: 'Could not find a user or role for `{name}`.',
   attachmentNotFound: 'Could not find an attachment for `{name}`.',
   failedToParseArgument: 'Failed to parse required argument `{name}`.',
+  guardOwnerOnly: 'This command is for the bot owner only.',
+  guardDevOnly: 'This command can only be used in the development server.',
+  guardBlacklisted: 'You are not allowed to use this command.',
+  guardNotAllowed: 'You are not permitted to use this command.',
+  guardMissingRole: 'You are missing a required role to use this command.',
 } as const;
 
 export type ErrorMessages = typeof defaultMessages;
