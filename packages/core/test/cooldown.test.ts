@@ -83,7 +83,9 @@ describe('createCooldownStore', () => {
     expect(await createCooldownStore('none')).toBeInstanceOf(MemoryCooldownStore);
   });
 
-  it('throws for database backends until Phase 5', async () => {
-    await expect(createCooldownStore('postgres')).rejects.toThrow(/not implemented/);
+  it('throws for database backends when their client is not provided', async () => {
+    await expect(createCooldownStore('postgres')).rejects.toThrow(/requires options.recordStore/);
+    await expect(createCooldownStore('mongo')).rejects.toThrow(/requires options.mongoose/);
+    await expect(createCooldownStore('redis')).rejects.toThrow(/requires options.redis/);
   });
 });

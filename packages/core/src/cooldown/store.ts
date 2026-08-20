@@ -2,6 +2,11 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { logger } from '../logger/index.js';
 import type { CooldownBackend } from '../types.js';
+import type { CooldownRecordStore, MongooseCooldownModel, RedisLike } from './db.js';
+import { MongooseCooldownStore, RecordBackedCooldownStore, RedisCooldownStore } from './db.js';
+
+export type { CooldownRecordStore, MongooseCooldownModel, RedisLike } from './db.js';
+export { MongooseCooldownStore, RecordBackedCooldownStore, RedisCooldownStore } from './db.js';
 
 /**
  * Abstraction over cooldown persistence. Backends implement the same three
@@ -121,12 +126,25 @@ export class FileCooldownStore implements CooldownStore {
 export interface CooldownStoreOptions {
   /** File path for the `file` backend. Default `data/cooldowns.json`. */
   filePath?: string;
+  /** Mongoose Cooldown model for the `mongo` backend. */
+  mongoose?: MongooseCooldownModel;
+  /** Redis client for the `redis` backend. */
+  redis?: RedisLike;
+  /**
+   * A {@link CooldownRecordStore} for the Drizzle backends (`sqlite`/`postgres`/
+   * `mysql`). The generated `db/queries/cooldown.ts` implements this against
+   * the project's drizzle client.
+   */
+  recordStore?: CooldownRecordStore;
 }
 
 /**
- * Creates the cooldown store matching the configured backend. Database
- * backends (sqlite/postgres/mysql/mongo/redis) throw here until Phase 5 wires
- * them up; `none` is normalized to an in-memory store.
+ * Creates the cooldown store matching the configured backend. `none` is
+ * normalized to an in-memory store. Database backends require their
+ * corresponding client/record-store to be passed in `options`:
+ *  - `mongo`                       → `options.mongoose` (the Cooldown model)
+ *  - `redis`                       → `options.redis` (the redis client)
+ *  - `sqlite`/`postgres`/`mysql`   → `options.recordStore` (a CooldownRecordStore)
  */
 export async function createCooldownStore(
   backend: CooldownBackend,
@@ -138,9 +156,29 @@ export async function createCooldownStore(
       return new MemoryCooldownStore();
     case 'file':
       return new FileCooldownStore(options.filePath ?? 'data/cooldowns.json');
+    case 'mongo': {
+      if (!options.mongoose) {
+        throw new Error('Cooldown backend "mongo" requires options.mongoose (the Cooldown model).');
+      }
+      return new RecordBackedCooldownStore(new MongooseCooldownStore(options.mongoose));
+    }
+    case 'redis': {
+      if (!options.redis) {
+        throw new Error('Cooldown backend "redis" requires options.redis (the redis client).');
+      }
+      return new RedisCooldownStore(options.redis);
+    }
+    case 'sqlite':
+    case 'postgres':
+    case 'mysql': {
+      if (!options.recordStore) {
+        throw new Error(
+          `Cooldown backend "${backend}" requires options.recordStore (a CooldownRecordStore from db/queries/cooldown).`,
+        );
+      }
+      return new RecordBackedCooldownStore(options.recordStore);
+    }
     default:
-      throw new Error(
-        `Cooldown backend "${backend}" is not implemented yet (database adapters arrive in Phase 5). Use "memory" or "file".`,
-      );
+      throw new Error(`Unknown cooldown backend "${backend}".`);
   }
 }
