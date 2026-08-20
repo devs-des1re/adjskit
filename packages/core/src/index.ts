@@ -11,11 +11,14 @@ export * from './builders/command.js';
 export * from './builders/button.js';
 export * from './builders/dropdown.js';
 export * from './builders/modal.js';
+export * from './builders/event.js';
 export * from './handlers/register.js';
 export * from './handlers/command.js';
 export * from './handlers/component.js';
+export * from './handlers/event.js';
 export * from './loaders/commandLoader.js';
 export * from './loaders/componentLoader.js';
+export * from './loaders/eventLoader.js';
 export { AdjskClient, createBot, resolveIntents } from './client.js';
 export type { CreateBotOptions } from './client.js';
 
