@@ -20,12 +20,15 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@adjskit/core": "workspace:*"
+    "@adjskit/core": "workspace:*",
+    "@clack/prompts": "^1.7.0",
+    "commander": "^15.0.0",
+    "picocolors": "^1.1.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.9.2",
     "vitest": "^3.0.0"
   }
 }
