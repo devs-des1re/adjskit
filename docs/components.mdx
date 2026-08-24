@@ -1,0 +1,86 @@
+# Components
+
+Buttons, modals, and dropdowns live in `src/buttons/`, `src/modals/`, and `src/dropdowns/`. Each file default-exports a builder.
+
+## Custom ids and params
+
+Any component can declare **params** that are packed into the custom id. The codec encodes snowflakes/numbers as compact base36 and optionally signs the id (via `componentStateSecret`).
+
+```tsx
+export default createButton('confirm_ban')
+  .addParam('targetId')
+  .setExecute(async (interaction, args) => {
+    await interaction.reply(`Banned <@${args.targetId}>`);
+  });
+```
+
+When building the button elsewhere, pass the params:
+
+```tsx
+import { buildCustomId } from '@adjskit/core';
+
+const customId = buildCustomId('confirm_ban', { targetId: user.id }, {
+  expiresIn: 300,        // seconds
+  userId: interaction.user.id,  // scope to a user
+});
+```
+
+Invalid signatures, expiry, or wrong user/guild scope are rejected with the configured error message. Custom ids warn if they exceed Discord's 100-char limit.
+
+## Buttons
+
+```tsx
+export default createButton('confirm_delete')
+  .addParam('messageId')
+  .setExecute(async (interaction, args) => {
+    await interaction.reply({ content: `Deleting ${args.messageId}`, ephemeral: true });
+  });
+```
+
+## Dropdowns
+
+Set the select type; the execute fn receives the decoded `args` and the selected `values`.
+
+```tsx
+import { createDropdown, SelectType } from '@adjskit/core';
+
+export default createDropdown('role_menu', { type: SelectType.Role })
+  .addParam('guildId')
+  .setExecute(async (interaction, args, values) => {
+    await interaction.reply(`Picked: ${values.map((r) => r.name).join(', ')}`);
+  });
+```
+
+`SelectType` supports `String`, `Role`, `Channel`, `User`, and `Mentionable`.
+
+## Modals
+
+Modals use discord.js **Components v2** field types: text inputs, text displays, string selects, radio groups, and image uploads.
+
+```tsx
+import { createModal, FieldStyle } from '@adjskit/core';
+
+export default createModal('feedback')
+  .setTitle('Feedback')
+  .addField('message', { style: FieldStyle.Paragraph, required: true })
+  .addTextDisplay('Tell us how it went.')
+  .addStringSelect('topic', {
+    options: [{ label: 'Bug', value: 'bug' }, { label: 'Feature', value: 'feature' }],
+  })
+  .addRadioGroup('priority', {
+    options: [{ label: 'Low', value: 'low' }, { label: 'High', value: 'high' }],
+  })
+  .addImageUpload('screenshot')
+  .setExecute(async (interaction, args, fields) => {
+    await interaction.reply(`Thanks: ${fields.message}`);
+  });
+```
+
+Show it with `interaction.showModal(modal.create())`:
+
+```tsx
+const modal = await import('./modals/feedback.js');
+await interaction.showModal(modal.default.create());
+```
+
+Radio groups require at least 2 options.

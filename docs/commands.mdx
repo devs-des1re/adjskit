@@ -1,0 +1,68 @@
+# Commands
+
+Commands live in `src/commands/`. Each file default-exports a builder:
+
+```tsx
+import { createCommand, ParamType } from '@adjskit/core';
+
+export default createCommand('ban')
+  .setDescription('Ban a member')
+  .setModule('moderation')       // misc metadata
+  .setMeta('perm', 'admin')      // any free-form metadata
+  .setType('both')               // 'slash' | 'prefix' | 'both'
+  .addAlias('banish')            // prefix-only alias
+  .addParam('user', ParamType.User, { required: true })
+  .addParam('reason', ParamType.String)
+  .setCooldown({ minutes: 5 })   // { seconds | minutes | hours | days }
+  .setPermissions({ ownerOnly: true })
+  .setExecute(async (ctx, ictx, args) => {
+    await ctx.reply(`Banned ${args.user}`);
+  });
+```
+
+The default export may be a builder **or** a resolved descriptor (`.build()`); loaders handle both.
+
+## Command type
+
+`.setType()` controls exposure:
+
+- `slash` — interaction only
+- `prefix` — message only
+- `both` — both (default)
+
+Set `prefix: null` in config to disable prefix commands entirely (slash-only bot, no `MessageContent` intent).
+
+## Arguments
+
+`.addParam(name, type, opts)` supports:
+
+| ParamType | Resolved value |
+| --- | --- |
+| `ParamType.String` | `string` |
+| `ParamType.Integer` | `number` |
+| `ParamType.Number` | `number` (float) |
+| `ParamType.Boolean` | `boolean` |
+| `ParamType.User` | `User` |
+| `ParamType.Channel` | `GuildBasedChannel` |
+| `ParamType.Role` | `Role` |
+| `ParamType.Mentionable` | `User \| Role` |
+| `ParamType.Attachment` | `Attachment` |
+
+Slash commands read directly from interaction options. Prefix commands **auto-fix** tokens: mentions/ids are resolved from cache, then via a fetch fallback, then by name — always yielding the same objects slash commands give you. The last `string` param consumes the remaining tokens (`args._raw` / `args._rest` are available on prefix).
+
+## ctx and ictx
+
+The execute fn receives `(ctx, ictx, args)`:
+
+- **`ctx`** — always present. A unified facade over the message (prefix) or interaction (slash): `author`, `member`, `guild`, `guildId`, `channel`, `message`, `reply()`, `send()`. `ctx.channel` resolves to a no-op bypass when unavailable, so `ctx.channel.send(...)` never throws.
+- **`ictx`** — the real `ChatInputCommandInteraction` for slash commands; a **bypass proxy** for prefix commands, so `await ictx.reply('hi')` simply no-ops rather than throwing.
+
+## Cooldowns
+
+Set a cooldown in seconds, minutes, hours, or days. The default error message includes a Discord relative timestamp:
+
+```
+You are on cooldown. Try again <t:1700000015:R> (12.3s left).
+```
+
+Cooldowns are persisted via the configured backend (memory, file, or database) — see `docs/database`.
