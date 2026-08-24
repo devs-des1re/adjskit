@@ -32,10 +32,10 @@
 }
 
 :root {
-  --vp-font-family-base: 'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas,
-    monospace;
-  --vp-font-family-mono: 'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas,
-    monospace;
+  --vp-font-family-base:
+    'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --vp-font-family-mono:
+    'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
 
   --vp-c-brand-1: #0088ff;
   --vp-c-brand-2: #0077e6;
@@ -48,4 +48,46 @@
 
 .dark {
   --vp-c-brand-soft: rgba(0, 136, 255, 0.16);
+}
+
+/* --- Home hero: centered, tighter type scale --- */
+.VPHome .VPHero .container {
+  text-align: center;
+}
+
+.VPHome .VPHero .actions {
+  justify-content: center;
+}
+
+.VPHome .VPHero .name,
+.VPHome .VPHero .text {
+  font-size: 34px;
+  line-height: 42px;
+}
+
+.VPHome .VPHero .tagline {
+  margin-inline: auto;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .VPHome .VPHero .name,
+  .VPHome .VPHero .text {
+    font-size: 40px;
+    line-height: 50px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHome .VPHero .name,
+  .VPHome .VPHero .text {
+    font-size: 44px;
+    line-height: 54px;
+  }
+
+  .VPHome .VPHero .tagline {
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 26px;
+  }
 }

@@ -33,21 +33,3 @@ features:
     details: Pick none, file, sqlite, postgres, mysql, mongo, or redis at scaffold time — schema and queries generated.
     link: /docs/guides/database
 ---
-
-<div class="quickstart">
-
-```bash
-npx adjskit create my-bot
-cd my-bot
-npm run dev
-```
-
-</div>
-
-<style>
-.quickstart {
-  max-width: 1152px;
-  margin: -2rem auto 0;
-  padding: 0 24px;
-}
-</style>
