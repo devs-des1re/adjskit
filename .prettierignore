@@ -4,5 +4,5 @@ dist/
 logs/
 coverage/
 pnpm-lock.yaml
-site/.krate/
-site/public/
+packages/web/.krate/
+packages/web/public/

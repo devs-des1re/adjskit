@@ -78,7 +78,7 @@ export default function DocsLayout(props: DocLayoutProps) {
         <button class="toc-mobile-toggle" id="toc-toggle" aria-label="Toggle table of contents" aria-controls="toc" aria-expanded="false">
           <span class="toc-mobile-copy">
             <span class="toc-mobile-label">On this page</span>
-            <span class="toc-current" id="toc-current">{props.pageTitle}</span>
+            <span class="toc-current" id="toc-current">{pageTitle}</span>
           </span>
           <Icon name="tabler:chevron-down" width="18" height="18" />
         </button>
@@ -89,7 +89,9 @@ export default function DocsLayout(props: DocLayoutProps) {
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <div class="sidebar-header-row">
-            <a class="sidebar-brand" href="/docs/">{siteTitle}</a>
+            <div class="sidebar-social-links">
+              <SocialLinks links={props.socialLinks} />
+            </div>
             <button class="sidebar-close" id="sidebar-close" aria-label="Close navigation">
               <Icon name="tabler:x" width="18" height="18" />
             </button>

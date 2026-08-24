@@ -1,0 +1,19 @@
+{
+  "name": "@adjskit/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The official adjskit documentation website.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "krate dev",
+    "build": "krate build",
+    "serve": "krate serve",
+    "preview": "krate serve",
+    "test:docs": "krate build"
+  },
+  "devDependencies": {
+    "@krate/core": "^0.1.5",
+    "@krate/runtime": "^0.1.5"
+  }
+}

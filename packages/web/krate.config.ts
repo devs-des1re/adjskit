@@ -1,4 +1,4 @@
-import { defineConfig, docs } from '@krate/core';
+import { defineConfig, docs, sitemap } from '@krate/core';
 
 export default defineConfig({
   entry: 'src/pages/index.tsx',
@@ -6,7 +6,6 @@ export default defineConfig({
   pagesDir: 'src/pages',
   publicDir: 'public',
   minify: true,
-  sourcemap: false,
 
   devServer: {
     port: 3000,
@@ -28,6 +27,7 @@ export default defineConfig({
   },
 
   plugins: [
+    sitemap({ baseUrl: 'https://adjskit.pages.dev', changeFreq: 'weekly', priority: '0.8' }),
     docs({
       contentDir: 'content/docs',
       title: 'adjskit',
@@ -35,13 +35,9 @@ export default defineConfig({
       search: {
         enabled: true,
         engine: 'docfind',
+        maxResults: 8,
       },
-      links: [
-        {
-          icon: 'lucide:github',
-          url: 'https://github.com/devs-des1re/adjskit',
-        },
-      ],
+      links: [{ icon: 'lucide:github', url: 'https://github.com/devs-des1re/adjskit' }],
     }),
   ],
 });

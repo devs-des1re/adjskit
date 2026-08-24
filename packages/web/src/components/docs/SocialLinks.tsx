@@ -14,8 +14,8 @@ export default function SocialLinks({ links }: SocialLinksProps) {
   return (
     <span>
       {links.map((link) => (
-        <a class="social-link" href={link.url} aria-label={link.name || 'GitHub'}>
-          <Icon name="tabler:brand-github" width="18" height="18" />
+        <a class="social-link" href={link.url}>
+          <Icon name={link.icon} width="20" height="20" />
         </a>
       ))}
     </span>
