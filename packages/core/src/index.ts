@@ -23,4 +23,4 @@ export * from './loaders/normalize.js';
 export { AdjskClient, createBot, resolveIntents } from './client.js';
 export type { CreateBotOptions } from './client.js';
 
-export const ADJSKIT_VERSION = '0.0.0';
+export const ADJSKIT_VERSION = '0.1.0';

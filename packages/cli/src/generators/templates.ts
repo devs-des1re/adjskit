@@ -3,7 +3,7 @@ import { toJs, ext } from '../utils.js';
 import type { CreateOptions, DatabasePreset, Lang, ScaffoldedFile } from '../types.js';
 
 const D = {
-  core: '^0.0.0',
+  core: '^0.1.0',
   discord: '^14.16.0',
   zod: '^3.24.0',
   dotenv: '^16.4.5',

@@ -1,7 +1,8 @@
 {
   "name": "adjskit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CLI to scaffold and manage discord.js bot projects built on @adjskit/core.",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "adjskit": "./dist/index.js"
