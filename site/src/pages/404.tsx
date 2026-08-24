@@ -5,7 +5,6 @@ export default function NotFound() {
         <title>404 - adjskit</title>
         <link rel="stylesheet" href="/docs-styles.css" />
         <link rel="stylesheet" href="/home.css" />
-        <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <div class="home-shell">

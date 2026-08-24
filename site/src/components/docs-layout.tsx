@@ -55,7 +55,6 @@ export default function DocsLayout(props: DocLayoutProps) {
     <div class="docs-page">
       <Head>
         <link rel="stylesheet" href="/docs-styles.css" />
-        <link rel="icon" href="/favicon.svg" />
         <title>{pageTitle} - {siteTitle}</title>
       </Head>
 

@@ -146,8 +146,7 @@ export default function Home() {
                 />
                 <link rel="stylesheet" href="/docs-styles.css" />
                 <link rel="stylesheet" href="/home.css" />
-                <link rel="icon" href="/favicon.svg" />
-            </Head>
+              </Head>
 
             <div class="home-shell">
                 <header class="docs-navbar">
