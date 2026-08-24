@@ -21,6 +21,14 @@ const D = {
   prettier: '^3.4.0',
 };
 
+/** The @adjskit/core version the CLI ships (written into generated projects). */
+export const CORE_VERSION = D.core;
+
+/** Runtime dependency package names for a db preset (used by doctor). */
+export function dbDependencyNames(db: DatabasePreset): string[] {
+  return Object.keys(dbDeps(db).deps);
+}
+
 /** Renders a TS source file for the target language (transpiled for JS). */
 function render(tsSource: string, lang: Lang): string {
   return lang === 'ts' ? tsSource : toJs(tsSource);
@@ -594,6 +602,40 @@ export function dbFiles(opts: CreateOptions): ScaffoldedFile[] {
 }
 
 // ---------------------------------------------------------------------------
+// Sync script (managed)
+// ---------------------------------------------------------------------------
+
+export function syncScript(opts: CreateOptions): ScaffoldedFile {
+  const src = `import 'dotenv/config';
+import { REST, Routes } from 'discord.js';
+import { loadCommands, buildApplicationCommandData, AdjskClient } from '@adjskit/core';
+import { config } from '../src/config.js';
+
+const client = new AdjskClient({ intents: [] });
+await loadCommands(client, 'src/commands');
+
+const data = [...client.slashCommands.values()]
+  .filter((desc) => desc.type === 'slash' || desc.type === 'both')
+  .map(buildApplicationCommandData);
+
+const rest = new REST({ version: '10' }).setToken(config.token);
+
+if (config.commandRegistration === 'global') {
+  await rest.put(Routes.applicationCommands(config.clientId), { body: data });
+} else {
+  const guilds = config.commandRegistration === 'multiGuild' ? config.guildIds : [config.guildId];
+  for (const guildId of guilds) {
+    if (!guildId) throw new Error('Missing guild id for command registration.');
+    await rest.put(Routes.applicationGuildCommands(config.clientId, guildId), { body: data });
+  }
+}
+
+console.log(\`Synced \${data.length} command(s).\`);
+`;
+  return { path: `scripts/syncCommands${ext(opts.lang)}`, content: render(src, opts.lang) };
+}
+
+// ---------------------------------------------------------------------------
 // Project assembly
 // ---------------------------------------------------------------------------
 
@@ -612,9 +654,46 @@ export function generateFiles(opts: CreateOptions): ScaffoldedFile[] {
     indexFile(opts),
     pingCommand(opts),
     readyEvent(opts),
+    syncScript(opts),
     gitkeep('src/buttons'),
     gitkeep('src/modals'),
     gitkeep('src/dropdowns'),
     ...dbFiles(opts),
   ];
+}
+
+/** Paths of files the framework owns and `update` may regenerate. */
+export function managedFilePaths(opts: CreateOptions): string[] {
+  const e = ext(opts.lang);
+  const paths = [
+    `src/index${e}`,
+    opts.lang === 'ts' ? 'tsconfig.json' : 'jsconfig.json',
+    '.prettierrc.json',
+    '.prettierignore',
+    '.env.example',
+    '.gitignore',
+    `scripts/syncCommands${e}`,
+  ];
+  switch (opts.db) {
+    case 'sqlite':
+    case 'postgres':
+    case 'mysql':
+      paths.push(`src/db/index${e}`, `src/db/queries/cooldown${e}`, 'drizzle.config.ts');
+      break;
+    case 'mongo':
+      paths.push(`src/db/index${e}`, `src/db/schema${e}`);
+      break;
+    case 'redis':
+      paths.push(`src/db/index${e}`);
+      break;
+    default:
+      break;
+  }
+  return paths;
+}
+
+/** Returns only the framework-managed files (subset of {@link generateFiles}). */
+export function generateManagedFiles(opts: CreateOptions): ScaffoldedFile[] {
+  const managed = new Set(managedFilePaths(opts));
+  return generateFiles(opts).filter((file) => managed.has(file.path));
 }

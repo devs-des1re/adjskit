@@ -82,4 +82,14 @@ describe('loadCommands', () => {
     const count = await loadCommands(client, join(dir, 'does-not-exist'));
     expect(count).toBe(0);
   });
+
+  it('loads a file whose default export is a builder (no .build())', async () => {
+    writeFileSync(
+      join(dir, 'builder.mjs'),
+      `export default { build: () => ({ name: 'builderCmd', type: 'both', aliases: [], params: [], execute: async () => {} }) };\n`,
+    );
+    const count = await loadCommands(client, dir);
+    expect(count).toBe(1);
+    expect(client.slashCommands.has('builderCmd')).toBe(true);
+  });
 });

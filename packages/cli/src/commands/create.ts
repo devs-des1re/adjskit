@@ -3,8 +3,9 @@ import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import pc from 'picocolors';
 import { runCreateFlow } from '../prompts/createFlow.js';
-import { generateFiles, envExample } from '../generators/templates.js';
+import { generateFiles, generateManagedFiles, envExample } from '../generators/templates.js';
 import { writeFile, writeFiles, gitInit } from '../utils.js';
+import { hashContent, writeManifest, MANIFEST_FILE } from '../project.js';
 import type { CreateOptions } from '../types.js';
 
 /** Builds a real `.env` from provided secrets (everything else stays placeholder). */
@@ -65,6 +66,21 @@ export async function handleCreate(opts: CreateOptions): Promise<void> {
   const files = generateFiles(opts);
   writeFiles(targetDir, files);
 
+  // Record framework-managed files + their hashes so `update` can regenerate
+  // them safely without clobbering user edits.
+  const managedFiles: Record<string, string> = {};
+  for (const file of generateManagedFiles(opts)) {
+    managedFiles[file.path] = hashContent(file.content);
+  }
+  writeManifest(targetDir, {
+    framework: 'adjskit',
+    version: 1,
+    lang: opts.lang,
+    db: opts.db,
+    prefix: opts.prefix,
+    managedFiles,
+  });
+
   if (opts.token || opts.clientId || (opts.guildIds && opts.guildIds.length > 0)) {
     writeFile(targetDir, '.env', envFile(opts));
   }
@@ -79,7 +95,10 @@ export async function handleCreate(opts: CreateOptions): Promise<void> {
 
   if (opts.git) gitInit(targetDir);
 
-  console.log(pc.green(`\n  Done. Next:\n    cd ${opts.name}\n    npm run dev\n`));
+  console.log(
+    pc.green(`\n  Done. Next:\n    cd ${opts.name}\n    npm run dev\n`),
+    `\n  Framework files are managed via ${pc.cyan(MANIFEST_FILE)} — run ${pc.cyan('adjskit update')} to refresh them.\n`,
+  );
 }
 
 /** Commander action entry point. */

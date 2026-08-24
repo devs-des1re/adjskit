@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { logger } from '../logger/index.js';
 import type { AdjskClient } from '../client.js';
 import type { ButtonDescriptor, DropdownDescriptor, ModalDescriptor } from '../descriptors.js';
+import { normalizeDescriptor } from './normalize.js';
 
 const VALID_EXTENSIONS = ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'];
 
@@ -52,7 +53,7 @@ export async function loadComponents(
 
   for (const file of listFiles(dirs.buttons ?? 'src/buttons')) {
     const mod = await importDefault(file);
-    const desc = mod?.default as ButtonDescriptor | undefined;
+    const desc = normalizeDescriptor<ButtonDescriptor>(mod?.default);
     if (!desc || typeof desc.customId !== 'string') {
       logger.warn(`Skipping ${file}: no valid button descriptor.`);
       continue;
@@ -63,7 +64,7 @@ export async function loadComponents(
 
   for (const file of listFiles(dirs.modals ?? 'src/modals')) {
     const mod = await importDefault(file);
-    const desc = mod?.default as ModalDescriptor | undefined;
+    const desc = normalizeDescriptor<ModalDescriptor>(mod?.default);
     if (!desc || typeof desc.customId !== 'string') {
       logger.warn(`Skipping ${file}: no valid modal descriptor.`);
       continue;
@@ -74,7 +75,7 @@ export async function loadComponents(
 
   for (const file of listFiles(dirs.dropdowns ?? 'src/dropdowns')) {
     const mod = await importDefault(file);
-    const desc = mod?.default as DropdownDescriptor | undefined;
+    const desc = normalizeDescriptor<DropdownDescriptor>(mod?.default);
     if (!desc || typeof desc.customId !== 'string') {
       logger.warn(`Skipping ${file}: no valid dropdown descriptor.`);
       continue;

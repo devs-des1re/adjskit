@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { logger } from '../logger/index.js';
 import type { AdjskClient } from '../client.js';
 import type { CommandDescriptor } from '../descriptors.js';
+import { normalizeDescriptor } from './normalize.js';
 
 /** Extensions treated as loadable command files. */
 const VALID_EXTENSIONS = ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'];
@@ -50,7 +51,7 @@ export async function loadCommands(client: AdjskClient, dir = 'src/commands'): P
       continue;
     }
 
-    const descriptor = module.default as CommandDescriptor | undefined;
+    const descriptor = normalizeDescriptor<CommandDescriptor>(module.default);
     if (!descriptor || typeof descriptor.name !== 'string') {
       logger.warn(`Skipping ${file}: no valid command descriptor (expected a default export).`);
       continue;

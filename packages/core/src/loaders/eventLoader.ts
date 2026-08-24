@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { logger } from '../logger/index.js';
 import type { AdjskClient } from '../client.js';
 import type { EventDescriptor } from '../descriptors.js';
+import { normalizeDescriptor } from './normalize.js';
 
 const VALID_EXTENSIONS = ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts'];
 
@@ -44,7 +45,7 @@ export async function loadEvents(client: AdjskClient, dir = 'src/events'): Promi
       continue;
     }
 
-    const descriptor = module.default as EventDescriptor | undefined;
+    const descriptor = normalizeDescriptor<EventDescriptor>(module.default);
     if (!descriptor || typeof descriptor.name !== 'string') {
       logger.warn(`Skipping ${file}: no valid event descriptor (expected a default export).`);
       continue;

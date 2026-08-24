@@ -19,6 +19,7 @@ export * from './handlers/event.js';
 export * from './loaders/commandLoader.js';
 export * from './loaders/componentLoader.js';
 export * from './loaders/eventLoader.js';
+export * from './loaders/normalize.js';
 export { AdjskClient, createBot, resolveIntents } from './client.js';
 export type { CreateBotOptions } from './client.js';
 
