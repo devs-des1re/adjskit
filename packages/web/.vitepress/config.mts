@@ -1,11 +1,14 @@
 import { defineConfig } from 'vitepress';
 
+const base = process.env.DOCS_BASE_PATH ?? '/';
+
 export default defineConfig({
   lang: 'en-US',
   title: 'adjskit',
   description:
     'A discord.js v14 framework with unified slash + prefix commands, signed components, typed events, cooldowns, and database presets.',
 
+  base,
   srcDir: 'content',
   outDir: 'dist',
   cleanUrls: true,
