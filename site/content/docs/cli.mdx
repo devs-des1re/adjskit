@@ -1,3 +1,9 @@
+---
+title: CLI Reference
+order: 3
+keywords: cli, create, add, update, doctor, env, sync
+---
+
 # CLI
 
 The `adjskit` CLI scaffolds and manages projects.
@@ -39,7 +45,7 @@ npx adjskit add dropdown role_menu
 Refresh **framework-managed files** (src/index, tsconfig/jsconfig, prettier, gitignore, env.example, sync script, and db files) without touching your commands, components, config, or schema. A managed file is only overwritten if it hasn't been edited; modified files are skipped unless `--force`.
 
 ```bash
-npx adjskit update          # regenerate managed files + bump @adjskit/core + npm install
+npx adjskit update # regenerate managed files + bump @adjskit/core + npm install
 npx adjskit update --dry-run
 npx adjskit update --force  # overwrite modified managed files
 npx adjskit update --no-install

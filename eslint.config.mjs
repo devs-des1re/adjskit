@@ -4,7 +4,15 @@ import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/*.tsbuildinfo', 'smoke-bot/**'],
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/coverage/**',
+      '**/*.tsbuildinfo',
+      'smoke-bot/**',
+      'site/.krate/**',
+      'site/public/**',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

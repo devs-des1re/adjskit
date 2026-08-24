@@ -1,8 +1,14 @@
+---
+title: Config & errors
+order: 4
+keywords: config, defineConfig, env, messages, errors
+---
+
 # Config & errors
 
 `src/config.ts` (user-owned) is the single source of truth. It uses `defineConfig` plus zod for env validation — everything comes from the library.
 
-```tsx
+```ts
 import { defineConfig, defineEnv, defaultEnvSchema, z } from '@adjskit/core';
 
 const envSchema = defaultEnvSchema.extend({

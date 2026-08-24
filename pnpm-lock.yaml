@@ -99,6 +99,15 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.1)(supports-color@7.2.0)
 
+  site:
+    dependencies:
+      '@krate/core':
+        specifier: ^0.1.5
+        version: 0.1.5
+      '@krate/runtime':
+        specifier: ^0.1.5
+        version: 0.1.5
+
 packages:
 
   '@clack/core@1.4.3':
@@ -519,6 +528,57 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@krate/core-darwin-arm64@0.1.5':
+    resolution: {integrity: sha512-nbMSB+NoGi1UARc/xA06A4k5+OlLW9CUNswSgqP9O/umFm4CRSKVNzGdC+dWDgcK5IPm9ejgCbrMLyXy3cV8Tg==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@krate/core-darwin-x64@0.1.5':
+    resolution: {integrity: sha512-RoOsKabkCKNlpdNcjv/7LI72DphWGgRcUbGrL2z7+oIosNG7pjQBvzerDJMfV5SpL/HMsBr1nhlGtINVzZzZOA==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@krate/core-linux-arm64@0.1.5':
+    resolution: {integrity: sha512-r9EuZGbqJoOlmTgbiUWMDdGwMgTKzoE7CsF7F3uQDu5p1fmfFIuiZsV97QVxF+lRAhgwY+CbhQlRhUPx4+7lBQ==}
+    cpu: [arm64]
+    os: [linux]
+    hasBin: true
+
+  '@krate/core-linux-x64-musl@0.1.5':
+    resolution: {integrity: sha512-hn3XCDw1PBeSnJ5OuvUR2Rxx3iRPqTAsbWG97rVvx7+ovFgj0aALI2kOX4GhTEEBdM5bzLx5beozqMG+g9v8gQ==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+
+  '@krate/core-linux-x64@0.1.5':
+    resolution: {integrity: sha512-fjpiWnp9Dp7FJCpq+skwlPLVG32/r4kkqZzyO6+1E9d1Rsz7OSq5jGZ8WV/8S1I3yfRamrSrCnneA7e3mIxGow==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+
+  '@krate/core-win32-arm64@0.1.5':
+    resolution: {integrity: sha512-24HHVfdXyQ0S2W9BeXssCkIBxWH5pgWwbW4I5J1Z0LLItZnfRP0e6A2QLWdV54ZyId4g6tetCEkwphIKbMdVqA==}
+    cpu: [arm64]
+    os: [win32]
+    hasBin: true
+
+  '@krate/core-win32-x64@0.1.5':
+    resolution: {integrity: sha512-BMq0QunYK4QmO9KcCF3prFgBvMAl4m18QKxr0/xNFwNjYYOINEKVKrX1UcJarcoYD9clKDjKM95AanyQ+q1TRg==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  '@krate/core@0.1.5':
+    resolution: {integrity: sha512-lm9Vq9w7YB/OEB4dKOzlOCmKvGkV9JgXq9d8nlsO7chRqOZCvoV9mU5DhSDiqw/unjFgEX+xZVF4vytPFRU5aA==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  '@krate/runtime@0.1.5':
+    resolution: {integrity: sha512-H00u2+z2tnDFFXkCpaDoZH4dN95N1Mz1yTz9iFVyuBpoAiIxahDpRFqkUKfgdT3AynNdWETV4Dlm5vy4Bj14wg==}
+    engines: {node: '>=20'}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     resolution: {integrity: sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ==}
@@ -1806,6 +1866,39 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@krate/core-darwin-arm64@0.1.5':
+    optional: true
+
+  '@krate/core-darwin-x64@0.1.5':
+    optional: true
+
+  '@krate/core-linux-arm64@0.1.5':
+    optional: true
+
+  '@krate/core-linux-x64-musl@0.1.5':
+    optional: true
+
+  '@krate/core-linux-x64@0.1.5':
+    optional: true
+
+  '@krate/core-win32-arm64@0.1.5':
+    optional: true
+
+  '@krate/core-win32-x64@0.1.5':
+    optional: true
+
+  '@krate/core@0.1.5':
+    optionalDependencies:
+      '@krate/core-darwin-arm64': 0.1.5
+      '@krate/core-darwin-x64': 0.1.5
+      '@krate/core-linux-arm64': 0.1.5
+      '@krate/core-linux-x64': 0.1.5
+      '@krate/core-linux-x64-musl': 0.1.5
+      '@krate/core-win32-arm64': 0.1.5
+      '@krate/core-win32-x64': 0.1.5
+
+  '@krate/runtime@0.1.5': {}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true

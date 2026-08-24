@@ -29,3 +29,4 @@ Thumbs.db
 *.tgz
 .cache/
 smoke-bot/
+site/.krate/

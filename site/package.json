@@ -1,0 +1,16 @@
+{
+  "name": "@adjskit/site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "krate dev",
+    "build": "krate build && node scripts/prefix-base.mjs",
+    "serve": "krate serve",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@krate/core": "^0.1.5",
+    "@krate/runtime": "^0.1.5"
+  }
+}

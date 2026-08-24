@@ -78,7 +78,14 @@ pnpm smoke       # scaffold a local bot wired to the built core
 
 ## Documentation
 
-Guides live in [`docs/`](docs): [commands](docs/commands.mdx), [components](docs/components.mdx), [events](docs/events.mdx), [configuration](docs/config.mdx), [database](docs/database.mdx), and the [CLI](docs/cli.mdx).
+Full documentation lives at **[devs-des1re.github.io/adjskit](https://devs-des1re.github.io/adjskit/)** — [commands](https://devs-des1re.github.io/adjskit/docs/guides/commands/), [components](https://devs-des1re.github.io/adjskit/docs/guides/components/), [events](https://devs-des1re.github.io/adjskit/docs/guides/events/), [configuration](https://devs-des1re.github.io/adjskit/docs/guides/config/), [databases](https://devs-des1re.github.io/adjskit/docs/guides/database/), and the [CLI reference](https://devs-des1re.github.io/adjskit/docs/cli/).
+
+The site is built with [Krate](https://kratejs.pages.dev) from [`site/`](site) and deploys automatically to GitHub Pages on pushes that touch `site/**`. To work on it locally:
+
+```bash
+pnpm install
+pnpm --filter @adjskit/site dev    # http://localhost:3000
+```
 
 ## License
 

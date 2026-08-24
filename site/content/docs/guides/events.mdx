@@ -1,24 +1,27 @@
+---
+title: Events
+order: 3
+keywords: events, listeners, once
+---
+
 # Events
 
 Events live in `src/events/`. Each file default-exports a builder. The event name is a `keyof ClientEvents`, so the execute arguments are fully typed.
 
-```tsx
+```ts
 import { createEvent } from '@adjskit/core';
 
-export default createEvent('guildMemberAdd')
-  .setExecute(async (member) => {
-    await member.guild.systemChannel?.send(`Welcome ${member}!`);
-  });
+export default createEvent('guildMemberAdd').setExecute(async (member) => {
+  await member.guild.systemChannel?.send(`Welcome ${member}!`);
+});
 ```
 
 Use `.setOnce()` for a listener that fires exactly one time (registered via `client.once`):
 
-```tsx
-export default createEvent('ready')
-  .setOnce()
-  .setExecute(async (client) => {
-    console.log(`Logged in as ${client.user?.tag}`);
-  });
+```ts
+export default createEvent('ready').setOnce().setExecute(async (client) => {
+  console.log(`Logged in as ${client.user?.tag}`);
+});
 ```
 
 Multiple event files may listen to the same event name; each is registered independently. Listener rejections are caught and logged rather than crashing the process.
