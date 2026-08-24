@@ -1,8 +1,8 @@
-import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import pc from 'picocolors';
 import { findProjectRoot, detectLang } from '../project.js';
+import { runCommand } from '../utils.js';
 
 /**
  * Registers slash commands without starting the bot by running the project's
@@ -27,5 +27,5 @@ export async function runSync(cwd: string = process.cwd()): Promise<void> {
   const command = lang === 'ts' ? 'npx' : 'node';
   const args = lang === 'ts' ? ['tsx', script] : [script];
   console.log(pc.cyan(`Syncing slash commands…`));
-  execFileSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' });
+  runCommand(root, command, args);
 }

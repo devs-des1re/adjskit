@@ -1,4 +1,3 @@
-import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import pc from 'picocolors';
@@ -11,7 +10,7 @@ import {
   hashContent,
 } from '../project.js';
 import { generateManagedFiles, CORE_VERSION } from '../generators/templates.js';
-import { writeFile } from '../utils.js';
+import { npmInstall, writeFile } from '../utils.js';
 import type { CreateOptions } from '../types.js';
 
 export interface UpdateOptions {
@@ -107,6 +106,6 @@ export async function handleUpdate(opts: UpdateOptions = {}): Promise<void> {
 
   if (opts.install) {
     console.log(pc.cyan('\nInstalling dependencies…'));
-    execFileSync('npm', ['install'], { cwd: root, stdio: 'inherit' });
+    npmInstall(root);
   }
 }

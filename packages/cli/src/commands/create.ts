@@ -1,10 +1,9 @@
-import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import pc from 'picocolors';
 import { runCreateFlow } from '../prompts/createFlow.js';
 import { generateFiles, generateManagedFiles, envExample } from '../generators/templates.js';
-import { writeFile, writeFiles, gitInit } from '../utils.js';
+import { writeFile, writeFiles, gitInit, npmInstall } from '../utils.js';
 import { hashContent, writeManifest, MANIFEST_FILE } from '../project.js';
 import type { CreateOptions } from '../types.js';
 
@@ -90,7 +89,7 @@ export async function handleCreate(opts: CreateOptions): Promise<void> {
 
   if (opts.install) {
     console.log(pc.cyan('  Installing dependencies…\n'));
-    execFileSync('npm', ['install'], { cwd: targetDir, stdio: 'inherit' });
+    npmInstall(targetDir);
   }
 
   if (opts.git) gitInit(targetDir);

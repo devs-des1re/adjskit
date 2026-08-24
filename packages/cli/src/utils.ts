@@ -1,8 +1,34 @@
 import { execFileSync } from 'node:child_process';
+import type { ExecFileSyncOptions } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import ts from 'typescript';
 import type { Lang } from './types.js';
+
+/**
+ * Spawns `command args...` in `dir`, inheriting stdio. On Windows, `npm`/`npx`
+ * are `.cmd` shims that Node cannot spawn directly, so the command runs
+ * through a shell as one joined string (arguments are static literals, never
+ * user input); this also avoids Node's DEP0190 deprecation warning.
+ */
+export function runCommand(
+  dir: string,
+  command: string,
+  args: string[],
+  options: ExecFileSyncOptions = {},
+): void {
+  const base: ExecFileSyncOptions = { cwd: dir, stdio: 'inherit', ...options };
+  if (process.platform === 'win32') {
+    execFileSync([command, ...args].join(' '), { ...base, shell: true });
+  } else {
+    execFileSync(command, args, base);
+  }
+}
+
+/** Runs `npm install` in `dir` (Windows-safe). */
+export function npmInstall(dir: string): void {
+  runCommand(dir, 'npm', ['install']);
+}
 
 /** Writes a file, creating parent directories as needed. */
 export function writeFile(rootDir: string, relativePath: string, content: string): void {
