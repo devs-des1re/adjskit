@@ -3,15 +3,3 @@ packages:
 
 allowBuilds:
   esbuild: true
-  '@krate/core': true
-
-minimumReleaseAgeExclude:
-  - '@krate/core-darwin-arm64@0.1.5'
-  - '@krate/core-darwin-x64@0.1.5'
-  - '@krate/core-linux-arm64@0.1.5'
-  - '@krate/core-linux-x64-musl@0.1.5'
-  - '@krate/core-linux-x64@0.1.5'
-  - '@krate/core-win32-arm64@0.1.5'
-  - '@krate/core-win32-x64@0.1.5'
-  - '@krate/core@0.1.5'
-  - '@krate/runtime@0.1.5'

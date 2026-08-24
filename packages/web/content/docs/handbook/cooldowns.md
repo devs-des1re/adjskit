@@ -1,7 +1,6 @@
 ---
 title: Cooldowns
-order: 2
-keywords: cooldown, rate limit, backend, memory, redis, timestamps
+description: cooldown, rate limit, backend, memory, redis, timestamps
 ---
 
 # Cooldowns
@@ -41,15 +40,15 @@ defineConfig({
 
 Cooldown state must survive restarts to be meaningful. Pick the storage that matches your deployment:
 
-| Backend   | Preset     | Notes                                    |
-| --------- | ---------- | ---------------------------------------- |
-| In-memory | `none`     | Resets on restart; zero dependencies     |
-| JSON file | `file`     | Persists to `data/cooldowns.json`        |
-| Drizzle   | `sqlite` / `postgres` / `mysql` | Full SQL durability |
-| Mongoose  | `mongo`    | Document-based                           |
-| ioredis   | `redis`    | Native TTL expiry, no cleanup needed     |
+| Backend   | Preset                          | Notes                                |
+| --------- | ------------------------------- | ------------------------------------ |
+| In-memory | `none`                          | Resets on restart; zero dependencies |
+| JSON file | `file`                          | Persists to `data/cooldowns.json`    |
+| Drizzle   | `sqlite` / `postgres` / `mysql` | Full SQL durability                  |
+| Mongoose  | `mongo`                         | Document-based                       |
+| ioredis   | `redis`                         | Native TTL expiry, no cleanup needed |
 
-Every database preset generates the cooldown table/model and query code automatically — see [Databases](/docs/guides/database/). The store is created once in `src/index`:
+Every database preset generates the cooldown table/model and query code automatically — see [Databases](/docs/guides/database). The store is created once in `src/index`:
 
 ```ts
 const cooldowns = await createCooldownStore(config.cooldownBackend, {

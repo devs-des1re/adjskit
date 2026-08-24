@@ -1,7 +1,6 @@
 ---
 title: Getting started
-order: 1
-keywords: getting started, install, scaffold, create, first bot, setup
+description: getting started, install, scaffold, create, first bot, setup
 ---
 
 # Getting started
@@ -12,7 +11,7 @@ This guide walks you from an empty folder to a running bot.
 
 - **Node.js 20 or newer** (`node --version` to check)
 - A Discord application with a bot user — create one in the [developer portal](https://discord.com/developers/applications) and copy the **token** and **client id**
-- The **Message Content** intent enabled in the portal *if* you plan to use prefix commands
+- The **Message Content** intent enabled in the portal _if_ you plan to use prefix commands
 
 ## Scaffold a project
 
@@ -38,7 +37,7 @@ DISCORD_CLIENT_ID=your-application-id
 DISCORD_GUILD_ID=your-test-server-id
 ```
 
-`DISCORD_GUILD_ID` registers slash commands to a single server instantly during development. Env validation is zod-based and runs at startup — see [Config & errors](/docs/guides/config/).
+`DISCORD_GUILD_ID` registers slash commands to a single server instantly during development. Env validation is zod-based and runs at startup — see [Config & errors](/docs/guides/config).
 
 ## Run it
 
@@ -63,6 +62,6 @@ This one file answers to both `/ping` and `!ping` — no duplicated handlers.
 
 ## Where to next
 
-- Add real [commands](/docs/guides/commands/) with typed arguments
-- Wire up [components](/docs/guides/components/) — buttons, dropdowns, modals
-- Browse the [project anatomy](/docs/guides/project-anatomy/) to see what was generated
+- Add real [commands](/docs/guides/commands) with typed arguments
+- Wire up [components](/docs/guides/components) — buttons, dropdowns, modals
+- Browse the [project anatomy](/docs/guides/project-anatomy) to see what was generated

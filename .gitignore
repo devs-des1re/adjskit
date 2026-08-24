@@ -29,4 +29,5 @@ Thumbs.db
 *.tgz
 .cache/
 smoke-bot/
-packages/web/.krate/
+
+packages/web/.vitepress/cache/

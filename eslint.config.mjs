@@ -12,6 +12,7 @@ export default tseslint.config(
       'smoke-bot/**',
       'packages/web/.krate/**',
       'packages/web/public/**',
+  'packages/web/.vitepress/cache/**',
     ],
   },
   js.configs.recommended,

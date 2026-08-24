@@ -6,14 +6,11 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "krate dev",
-    "build": "krate build && node scripts/fix-code-blocks.mjs",
-    "serve": "krate serve",
-    "preview": "krate serve",
-    "test:docs": "krate build"
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
   "devDependencies": {
-    "@krate/core": "^0.1.5",
-    "@krate/runtime": "^0.1.5"
+    "vitepress": "^1.6.3"
   }
 }

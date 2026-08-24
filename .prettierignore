@@ -6,3 +6,5 @@ coverage/
 pnpm-lock.yaml
 packages/web/.krate/
 packages/web/public/
+
+packages/web/.vitepress/cache/

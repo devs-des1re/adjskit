@@ -1,7 +1,6 @@
 ---
 title: Components
-order: 3
-keywords: buttons, dropdowns, modals, custom id, signed components
+description: buttons, dropdowns, modals, custom id, signed components
 ---
 
 # Components

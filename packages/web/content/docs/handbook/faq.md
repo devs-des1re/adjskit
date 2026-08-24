@@ -1,7 +1,6 @@
 ---
 title: FAQ
-order: 3
-keywords: faq, troubleshooting, slash commands not showing, intents, ephemeral
+description: faq, troubleshooting, slash commands not showing, intents, ephemeral
 ---
 
 # FAQ
@@ -31,7 +30,7 @@ await interaction.reply({
 
 ## Do I need the Message Content intent?
 
-Only for prefix commands. Enable **Message Content Intent** in the developer portal (*Bot → Privileged Gateway Intents*). If your bot is slash-only, set `prefix: null` in config and skip the intent entirely.
+Only for prefix commands. Enable **Message Content Intent** in the developer portal (_Bot → Privileged Gateway Intents_). If your bot is slash-only, set `prefix: null` in config and skip the intent entirely.
 
 ## TypeScript or JavaScript?
 
@@ -39,7 +38,7 @@ Both are first-class — pick at scaffold time (`--lang ts|js`). The generated c
 
 ## I edited a file and `adjskit update` wants to overwrite it
 
-You won't be surprised: modified managed files are **skipped** by default. Use `--dry-run` to see what would change, and `--force` only when you truly want the framework version back. See [Project anatomy](/docs/guides/project-anatomy/).
+You won't be surprised: modified managed files are **skipped** by default. Use `--dry-run` to see what would change, and `--force` only when you truly want the framework version back. See [Project anatomy](/docs/guides/project-anatomy).
 
 ## Where do I add my own env variables?
 

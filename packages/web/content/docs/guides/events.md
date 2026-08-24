@@ -1,7 +1,6 @@
 ---
 title: Events
-order: 4
-keywords: events, listeners, once
+description: events, listeners, once
 ---
 
 # Events
@@ -19,9 +18,11 @@ export default createEvent('guildMemberAdd').setExecute(async (member) => {
 Use `.setOnce()` for a listener that fires exactly one time (registered via `client.once`):
 
 ```ts
-export default createEvent('ready').setOnce().setExecute(async (client) => {
-  console.log(`Logged in as ${client.user?.tag}`);
-});
+export default createEvent('ready')
+  .setOnce()
+  .setExecute(async (client) => {
+    console.log(`Logged in as ${client.user?.tag}`);
+  });
 ```
 
 Multiple event files may listen to the same event name; each is registered independently. Listener rejections are caught and logged rather than crashing the process.

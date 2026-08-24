@@ -1,7 +1,6 @@
 ---
 title: Signed custom ids
-order: 1
-keywords: custom id, signed components, hmac, expiry, scope, security, codec
+description: custom id, signed components, hmac, expiry, scope, security, codec
 ---
 
 # Signed custom ids
@@ -10,7 +9,7 @@ Discord gives you exactly 100 characters of **custom id** to carry state from th
 
 ## The problem
 
-A "confirm ban" button needs to know *who* to ban. Naive approaches fail:
+A "confirm ban" button needs to know _who_ to ban. Naive approaches fail:
 
 - Global variables break with multiple clicks, restarts, and sharding
 - Raw snowflakes in the id can be edited by anyone crafting an interaction
@@ -51,22 +50,22 @@ const customId = buildCustomId(
 );
 ```
 
-| Option      | Effect                                                        |
-| ----------- | ------------------------------------------------------------- |
-| `expiresIn` | Seconds until the id expires                                   |
-| `userId`    | Reject clicks from any other user                              |
+| Option      | Effect                            |
+| ----------- | --------------------------------- |
+| `expiresIn` | Seconds until the id expires      |
+| `userId`    | Reject clicks from any other user |
 
 Guild scoping is derived from the interaction context — a button rendered in guild A cannot be exercised from guild B. Signatures are HMACs keyed by `DJSKIT_COMPONENT_SECRET`, which `defaultEnvSchema` validates for you.
 
 ## When validation fails
 
-Every rejection path maps to a configurable message (see [Config & errors](/docs/guides/config/)):
+Every rejection path maps to a configurable message (see [Config & errors](/docs/guides/config)):
 
-| Message key                    | Trigger                          |
-| ------------------------------ | -------------------------------- |
-| `componentExpired`             | Signature older than `expiresIn` |
-| `componentWrongUser`           | Clicker ≠ scoped user            |
-| `componentWrongGuild`          | Guild scope mismatch             |
-| `componentInvalidStateFallback`| Malformed or unverifiable id     |
+| Message key                     | Trigger                          |
+| ------------------------------- | -------------------------------- |
+| `componentExpired`              | Signature older than `expiresIn` |
+| `componentWrongUser`            | Clicker ≠ scoped user            |
+| `componentWrongGuild`           | Guild scope mismatch             |
+| `componentInvalidStateFallback` | Malformed or unverifiable id     |
 
 Because verification happens before your handler runs, a tampered id can never reach your code.

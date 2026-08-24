@@ -1,7 +1,6 @@
 ---
 title: Project anatomy
-order: 7
-keywords: project structure, files, managed files, update, sync, scripts
+description: project structure, files, managed files, update, sync, scripts
 ---
 
 # Project anatomy
@@ -35,25 +34,25 @@ my-bot/
 
 Framework-managed files can be regenerated at any time; your handlers, config, and schema are never touched.
 
-| Managed (regenerable)      | Yours (never overwritten)     |
-| -------------------------- | ----------------------------- |
-| `src/index`                | `src/commands/**`             |
-| `tsconfig` / `jsconfig`    | `src/events/**`               |
-| prettier + gitignore       | `src/buttons/**`, `dropdowns`, `modals` |
-| `.env.example`             | `src/config.ts`               |
-| `scripts/syncCommands`     | `src/db/schema.ts`            |
-| db client + query files    | anything else you add         |
+| Managed (regenerable)   | Yours (never overwritten)               |
+| ----------------------- | --------------------------------------- |
+| `src/index`             | `src/commands/**`                       |
+| `tsconfig` / `jsconfig` | `src/events/**`                         |
+| prettier + gitignore    | `src/buttons/**`, `dropdowns`, `modals` |
+| `.env.example`          | `src/config.ts`                         |
+| `scripts/syncCommands`  | `src/db/schema.ts`                      |
+| db client + query files | anything else you add                   |
 
 Run `npx adjskit update` to refresh managed files **and** bump `@adjskit/core` to the latest version. A managed file that you have modified is skipped — pass `--force` to overwrite it anyway, or `--dry-run` to preview.
 
 ## Package scripts
 
-| Script                    | Purpose                                              |
-| ------------------------- | ---------------------------------------------------- |
-| `dev`                     | Run the bot with auto-restart on changes             |
-| `start`                   | Run the bot in production mode                       |
-| `db:generate`             | Generate a Drizzle migration from `src/db/schema`    |
-| `db:migrate`              | Apply pending migrations                             |
-| `db:studio`               | Open Drizzle Studio                                  |
+| Script        | Purpose                                           |
+| ------------- | ------------------------------------------------- |
+| `dev`         | Run the bot with auto-restart on changes          |
+| `start`       | Run the bot in production mode                    |
+| `db:generate` | Generate a Drizzle migration from `src/db/schema` |
+| `db:migrate`  | Apply pending migrations                          |
+| `db:studio`   | Open Drizzle Studio                               |
 
-The `db:*` scripts only exist for the drizzle presets (`sqlite`, `postgres`, `mysql`). See [Databases](/docs/guides/database/) and [Deploying](/docs/guides/deployment/) for production concerns.
+The `db:*` scripts only exist for the drizzle presets (`sqlite`, `postgres`, `mysql`). See [Databases](/docs/guides/database) and [Deploying](/docs/guides/deployment) for production concerns.

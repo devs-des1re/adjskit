@@ -1,7 +1,6 @@
 ---
 title: Commands
-order: 2
-keywords: commands, slash commands, prefix commands, arguments, cooldown
+description: commands, slash commands, prefix commands, arguments, cooldown
 ---
 
 # Commands
@@ -71,4 +70,4 @@ Set a cooldown in seconds, minutes, hours, or days. The default error message in
 You are on cooldown. Try again <t:1700000015:R> (12.3s left).
 ```
 
-Cooldowns are persisted via the configured backend (memory, file, or database) — see [Databases](/docs/guides/database/).
+Cooldowns are persisted via the configured backend (memory, file, or database) — see [Databases](/docs/guides/database).

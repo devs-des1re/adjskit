@@ -1,7 +1,6 @@
 ---
 title: CLI Reference
-order: 4
-keywords: cli, create, add, update, doctor, env, sync
+description: cli, create, add, update, doctor, env, sync
 ---
 
 # CLI

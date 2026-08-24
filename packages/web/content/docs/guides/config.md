@@ -1,7 +1,6 @@
 ---
 title: Config & errors
-order: 5
-keywords: config, defineConfig, env, messages, errors
+description: config, defineConfig, env, messages, errors
 ---
 
 # Config & errors

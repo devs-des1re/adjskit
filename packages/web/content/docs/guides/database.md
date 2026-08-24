@@ -1,22 +1,21 @@
 ---
 title: Databases
-order: 6
-keywords: database, sqlite, postgres, mysql, mongo, redis, drizzle, cooldowns
+description: database, sqlite, postgres, mysql, mongo, redis, drizzle, cooldowns
 ---
 
 # Databases
 
 Pick a preset at scaffold time. Cooldowns are **automatically** added to the schema + queries for every preset — no extra work.
 
-| Preset    | Backend    | Generated files                                                                     |
-| --------- | ---------- | ----------------------------------------------------------------------------------- |
-| `none`    | in-memory  | —                                                                                   |
-| `file`    | JSON file  | `data/cooldowns.json`                                                               |
-| `sqlite`  | Drizzle    | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts`          |
-| `postgres`| Drizzle    | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts`          |
-| `mysql`   | Drizzle    | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts`          |
-| `mongo`   | Mongoose   | `src/db/index.ts`, `schema.ts`                                                      |
-| `redis`   | ioredis    | `src/db/index.ts`                                                                   |
+| Preset     | Backend   | Generated files                                                            |
+| ---------- | --------- | -------------------------------------------------------------------------- |
+| `none`     | in-memory | —                                                                          |
+| `file`     | JSON file | `data/cooldowns.json`                                                      |
+| `sqlite`   | Drizzle   | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts` |
+| `postgres` | Drizzle   | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts` |
+| `mysql`    | Drizzle   | `src/db/index.ts`, `schema.ts`, `queries/cooldown.ts`, `drizzle.config.ts` |
+| `mongo`    | Mongoose  | `src/db/index.ts`, `schema.ts`                                             |
+| `redis`    | ioredis   | `src/db/index.ts`                                                          |
 
 Drizzle presets get `db:generate`, `db:migrate`, and `db:studio` scripts. The cooldown table is created automatically at startup (and also defined in `schema.ts` for migrations).
 

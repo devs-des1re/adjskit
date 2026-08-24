@@ -1,7 +1,6 @@
 ---
 title: Deploying
-order: 8
-keywords: deploy, production, hosting, pm2, systemd, docker, vps
+description: deploy, production, hosting, pm2, systemd, docker, vps
 ---
 
 # Deploying your bot
@@ -25,7 +24,7 @@ DISCORD_TOKEN=...
 DISCORD_CLIENT_ID=...
 ```
 
-If you use signed component ids, also set `DJSKIT_COMPONENT_SECRET` to a long random string — components signed in production must be verifiable in production. See [Signed custom ids](/docs/handbook/signed-custom-ids/).
+If you use signed component ids, also set `DJSKIT_COMPONENT_SECRET` to a long random string — components signed in production must be verifiable in production. See [Signed custom ids](/docs/handbook/signed-custom-ids).
 
 ## 3. Run it
 
