@@ -39,7 +39,9 @@
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "prepack": "node ../../scripts/sync-package-assets.mjs",
+    "postpack": "node ../../scripts/sync-package-assets.mjs --clean"
   },
   "dependencies": {
     "@adjskit/core": "workspace:^",

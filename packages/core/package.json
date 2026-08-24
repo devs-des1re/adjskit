@@ -48,7 +48,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "prepack": "node ../../scripts/sync-package-assets.mjs",
+    "postpack": "node ../../scripts/sync-package-assets.mjs --clean"
   },
   "dependencies": {
     "discord.js": "^14.16.0",
