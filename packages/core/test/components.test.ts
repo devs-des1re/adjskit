@@ -113,13 +113,15 @@ describe('buildModalComponents', () => {
     const component = components[0] as {
       type: number;
       label: string;
-      component: { type: number; customId: string; style: number };
+      component: { type: number; customId: string; style: number; label?: string };
     };
     expect(component.type).toBe(ComponentType.Label);
     expect(component.label).toBe('Reason');
     expect(component.component.type).toBe(ComponentType.TextInput);
     expect(component.component.customId).toBe('reason');
     expect(component.component.style).toBe(TextInputStyle.Short);
+    // v2: a TextInput nested in a Label component must not carry its own label
+    expect(component.component.label).toBeUndefined();
   });
 
   it('maps a text display to a standalone TextDisplay', () => {

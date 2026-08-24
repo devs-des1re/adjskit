@@ -130,7 +130,6 @@ export function buildModalComponents(
         type: ComponentType.TextInput,
         customId: field.name,
         style: mapStyle(field.style),
-        label,
         required,
         minLength: field.minLength,
         maxLength: field.maxLength,
