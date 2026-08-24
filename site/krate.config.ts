@@ -21,7 +21,7 @@ export default defineConfig({
   },
 
   seo: {
-    baseUrl: 'https://adjskit.js.org',
+    baseUrl: 'https://adjskit.pages.dev',
     siteName: 'adjskit',
     description:
       'A discord.js v14 framework with unified slash + prefix commands, signed components, and database presets.',

@@ -78,9 +78,9 @@ pnpm smoke       # scaffold a local bot wired to the built core
 
 ## Documentation
 
-Full documentation lives at **[adjskit.js.org](https://adjskit.js.org/)** — [commands](https://adjskit.js.org/docs/guides/commands/), [components](https://adjskit.js.org/docs/guides/components/), [events](https://adjskit.js.org/docs/guides/events/), [configuration](https://adjskit.js.org/docs/guides/config/), [databases](https://adjskit.js.org/docs/guides/database/), and the [CLI reference](https://adjskit.js.org/docs/cli/).
+Full documentation lives at **[adjskit.pages.dev](https://adjskit.pages.dev/)** — [commands](https://adjskit.pages.dev/docs/guides/commands/), [components](https://adjskit.pages.dev/docs/guides/components/), [events](https://adjskit.pages.dev/docs/guides/events/), [configuration](https://adjskit.pages.dev/docs/guides/config/), [databases](https://adjskit.pages.dev/docs/guides/database/), and the [CLI reference](https://adjskit.pages.dev/docs/cli/).
 
-The site is built with [Krate](https://kratejs.pages.dev) from [`site/`](site) and deploys automatically to GitHub Pages on pushes that touch `site/**`. To work on it locally:
+The site is built with [Krate](https://kratejs.pages.dev) from [`site/`](site) and deploys via Cloudflare Pages. To work on it locally:
 
 ```bash
 pnpm install
