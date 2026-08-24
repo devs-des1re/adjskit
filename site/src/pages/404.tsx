@@ -16,6 +16,13 @@ export default function NotFound() {
             Back home
           </a>
         </main>
+
+        <footer class="site-footer">
+          <span>&copy; 2026 adjskit. All rights reserved.</span>
+          <a href="https://github.com/devs-des1re/adjskit/blob/main/LICENSE">
+            Released under the MIT License
+          </a>
+        </footer>
       </div>
     </>
   );

@@ -122,6 +122,13 @@ export default function DocsLayout(props: DocLayoutProps) {
         </aside>
       </div>
 
+      <footer class="docs-footer">
+        <span>&copy; 2026 adjskit. All rights reserved.</span>
+        <a href="https://github.com/devs-des1re/adjskit/blob/main/LICENSE">
+          Released under the MIT License
+        </a>
+      </footer>
+
       <script src="/docs-script.js" />
     </div>
   );

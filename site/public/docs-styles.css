@@ -1,3 +1,36 @@
+/* --- Geist Mono (self-hosted) --- */
+@font-face {
+    font-family: 'Geist Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/geist-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Geist Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/geist-mono-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Geist Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/geist-mono-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Geist Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/geist-mono-700.woff2') format('woff2');
+}
+
 :root,
 :root[data-theme="light"] {
     color-scheme: light;
@@ -8,8 +41,8 @@
     --radius: 8px;
     
     /* Typography */
-    --font-sans: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono Variable', "JetBrains Mono", "Fira Code", monospace;
+    --font-sans: 'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+    --font-mono: 'Geist Mono', ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
     
     /* Core Monochrome Palette */
     --color-bg: #ffffff;
@@ -31,13 +64,13 @@
     --blur-intensity: 12px;
     --navbar-bg: rgba(255, 255, 255, 0.75);
     --overlay-bg: rgba(9, 9, 11, 0.4);
-    --docs-accent-bg: rgba(249, 115, 22, 0.08);
-    --docs-accent-border: rgba(249, 115, 22, 0.2);
+    --docs-accent-bg: rgba(0, 136, 255, 0.08);
+    --docs-accent-border: rgba(0, 136, 255, 0.2);
     --docs-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 12px -5px rgba(0, 0, 0, 0.03);
     
     /* Brand Accent Colors (Requested) */
-    --color-primary: #f97316;
-    --color-primary-hover: #ea580c;
+    --color-primary: #0088ff;
+    --color-primary-hover: #0077e6;
 }
 
 :root[data-theme="dark"] {
@@ -59,12 +92,12 @@
     /* Dark Glassmorphism */
     --navbar-bg: rgba(9, 9, 11, 0.8);
     --overlay-bg: rgba(0, 0, 0, 0.6);
-    --docs-accent-bg: rgba(249, 115, 22, 0.12);
-    --docs-accent-border: rgba(249, 115, 22, 0.3);
+    --docs-accent-bg: rgba(0, 136, 255, 0.12);
+    --docs-accent-border: rgba(0, 136, 255, 0.3);
     --docs-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
     
-    --color-primary: #f97316;
-    --color-primary-hover: #f97316;
+    --color-primary: #0088ff;
+    --color-primary-hover: #0088ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,11 +117,11 @@
         --color-pre-fg: #f4f4f5;
         --navbar-bg: rgba(9, 9, 11, 0.8);
         --overlay-bg: rgba(0, 0, 0, 0.6);
-        --docs-accent-bg: rgba(249, 115, 22, 0.12);
-        --docs-accent-border: rgba(249, 115, 22, 0.3);
+        --docs-accent-bg: rgba(0, 136, 255, 0.12);
+        --docs-accent-border: rgba(0, 136, 255, 0.3);
         --docs-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-        --color-primary: #f97316;
-        --color-primary-hover: #f97316;
+        --color-primary: #0088ff;
+        --color-primary-hover: #0088ff;
     }
 }
 
@@ -974,5 +1007,34 @@ a:hover {
         width: var(--toc-width);
         background: transparent;
         order: 0;
+    }
+}
+
+/* --- Site Footer --- */
+.docs-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 2rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 13px;
+    color: var(--color-muted);
+}
+
+.docs-footer a {
+    color: var(--color-muted);
+}
+
+.docs-footer a:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 767px) {
+    .docs-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
     }
 }

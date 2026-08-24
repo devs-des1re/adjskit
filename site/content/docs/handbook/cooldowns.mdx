@@ -1,0 +1,60 @@
+---
+title: Cooldowns
+order: 2
+keywords: cooldown, rate limit, backend, memory, redis, timestamps
+---
+
+# Cooldowns
+
+Any command can declare a cooldown — enforcement, persistence, and user feedback are handled for you.
+
+```ts
+export default createCommand('ask')
+  .setDescription('Ask the bot a question')
+  .setCooldown({ minutes: 5 })
+  .setExecute(async (ctx) => {
+    /* ... */
+  });
+```
+
+Durations accept `{ seconds | minutes | hours | days }`.
+
+## User-facing messages
+
+The default message includes a Discord relative timestamp, so it counts down live in the client:
+
+```txt
+You are on cooldown. Try again <t:1700000015:R> (12.3s left).
+```
+
+Customize it per-bot via `messages.commandCooldown` using the `{unix}` and `{seconds}` placeholders:
+
+```ts
+defineConfig({
+  messages: {
+    commandCooldown: 'Chill out - try again <t:{unix}:R> ({seconds}s left).',
+  },
+});
+```
+
+## Backends
+
+Cooldown state must survive restarts to be meaningful. Pick the storage that matches your deployment:
+
+| Backend   | Preset     | Notes                                    |
+| --------- | ---------- | ---------------------------------------- |
+| In-memory | `none`     | Resets on restart; zero dependencies     |
+| JSON file | `file`     | Persists to `data/cooldowns.json`        |
+| Drizzle   | `sqlite` / `postgres` / `mysql` | Full SQL durability |
+| Mongoose  | `mongo`    | Document-based                           |
+| ioredis   | `redis`    | Native TTL expiry, no cleanup needed     |
+
+Every database preset generates the cooldown table/model and query code automatically — see [Databases](/docs/guides/database/). The store is created once in `src/index`:
+
+```ts
+const cooldowns = await createCooldownStore(config.cooldownBackend, {
+  recordStore: cooldownStore, // drizzle preset
+});
+```
+
+Because backends sit behind one interface, switching from `file` to `postgres` is a config change — commands don't know or care.

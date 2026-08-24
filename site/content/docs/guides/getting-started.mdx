@@ -1,0 +1,68 @@
+---
+title: Getting started
+order: 1
+keywords: getting started, install, scaffold, create, first bot, setup
+---
+
+# Getting started
+
+This guide walks you from an empty folder to a running bot.
+
+## Prerequisites
+
+- **Node.js 20 or newer** (`node --version` to check)
+- A Discord application with a bot user — create one in the [developer portal](https://discord.com/developers/applications) and copy the **token** and **client id**
+- The **Message Content** intent enabled in the portal *if* you plan to use prefix commands
+
+## Scaffold a project
+
+```bash
+npx adjskit create my-bot
+```
+
+The CLI asks three questions — language (`ts`/`js`), command prefix, and database preset — then generates the project and installs dependencies. Every question can be answered up front with flags:
+
+```bash
+npx adjskit create my-bot --lang ts --db sqlite --prefix '!' --guild-id 1234567890 --git
+```
+
+Use `--db none` for a dependency-free start; you can add storage later by re-running the scaffolding options through `adjskit update`.
+
+## Configure the environment
+
+Copy `.env.example` to `.env` and fill in your credentials:
+
+```ini
+DISCORD_TOKEN=your-bot-token
+DISCORD_CLIENT_ID=your-application-id
+DISCORD_GUILD_ID=your-test-server-id
+```
+
+`DISCORD_GUILD_ID` registers slash commands to a single server instantly during development. Env validation is zod-based and runs at startup — see [Config & errors](/docs/guides/config/).
+
+## Run it
+
+```bash
+npm run dev
+```
+
+The first run registers your slash commands (you can also do this on demand with `npx adjskit sync`). Invite the bot to your server with the `bot` and `applications.commands` scopes, then say hello:
+
+```ts
+// src/commands/ping.ts
+import { createCommand } from '@adjskit/core';
+
+export default createCommand('ping')
+  .setDescription('Check if the bot is alive')
+  .setExecute(async (ctx) => {
+    await ctx.reply('Pong!');
+  });
+```
+
+This one file answers to both `/ping` and `!ping` — no duplicated handlers.
+
+## Where to next
+
+- Add real [commands](/docs/guides/commands/) with typed arguments
+- Wire up [components](/docs/guides/components/) — buttons, dropdowns, modals
+- Browse the [project anatomy](/docs/guides/project-anatomy/) to see what was generated
