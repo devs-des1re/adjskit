@@ -59,21 +59,85 @@ function collectModalData(
     string,
     { type: number; value?: string; values?: readonly string[]; attachments?: unknown }
   >();
+
   for (const top of interaction.components) {
-    if ('component' in top) {
-      const data = top.component as {
-        customId: string;
-        type: number;
+    // Check if it's an action row with components (has a components property that's an array)
+    if ('components' in top && Array.isArray(top.components)) {
+      // It's an action row - iterate through its components
+      for (const sub of top.components) {
+        // Extract the data based on what's available
+        const customId = 'customId' in sub ? String(sub.customId) : '';
+        if (!customId) continue;
+
+        const data: {
+          type: number;
+          value?: string;
+          values?: readonly string[];
+          attachments?: unknown;
+        } = {
+          type: 'type' in sub ? Number(sub.type) : 0,
+        };
+
+        if ('value' in sub) {
+          data.value = sub.value as string | undefined;
+        }
+        if ('values' in sub) {
+          data.values = sub.values as readonly string[] | undefined;
+        }
+        if ('attachments' in sub) {
+          data.attachments = sub.attachments as unknown;
+        }
+
+        map.set(customId, data);
+      }
+    } else if ('component' in top) {
+      // Some Discord.js versions wrap components in a 'component' property
+      const component = top.component as {
+        customId?: string;
+        type?: number;
         value?: string;
         values?: readonly string[];
         attachments?: unknown;
       };
-      map.set(data.customId, data);
-    } else {
-      for (const sub of top.components) {
-        map.set(sub.customId, { type: sub.type, value: sub.value });
+      if (component.customId) {
+        const data: {
+          type: number;
+          value?: string;
+          values?: readonly string[];
+          attachments?: unknown;
+        } = {
+          type: component.type ?? 0,
+        };
+        if (component.value !== undefined) data.value = component.value;
+        if (component.values !== undefined) data.values = component.values;
+        if (component.attachments !== undefined) data.attachments = component.attachments;
+        map.set(component.customId, data);
       }
+    } else if ('customId' in top) {
+      // Direct component without wrapper
+      const customId = String(top.customId);
+      const data: {
+        type: number;
+        value?: string;
+        values?: readonly string[];
+        attachments?: unknown;
+      } = {
+        type: 'type' in top ? Number(top.type) : 0,
+      };
+
+      if ('value' in top) {
+        data.value = top.value as string | undefined;
+      }
+      if ('values' in top) {
+        data.values = top.values as readonly string[] | undefined;
+      }
+      if ('attachments' in top) {
+        data.attachments = top.attachments as unknown;
+      }
+
+      map.set(customId, data);
     }
+    // TextDisplay entries carry no submitted value and are skipped.
   }
   return map;
 }

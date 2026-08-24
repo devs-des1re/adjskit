@@ -72,4 +72,16 @@ describe('extractModalFields', () => {
     const result = extractModalFields(interaction, fields);
     expect(result.reason).toBe('wrapped');
   });
+
+  it('ignores text display entries (no component/components) in the submission', () => {
+    const interaction = fakeInteraction([
+      { type: ComponentType.TextDisplay },
+      {
+        type: ComponentType.Label,
+        component: { type: ComponentType.TextInput, customId: 'reason', value: 'because' },
+      },
+    ]);
+    const result = extractModalFields(interaction, fields);
+    expect(result.reason).toBe('because');
+  });
 });
