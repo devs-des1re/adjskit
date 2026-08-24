@@ -3,28 +3,28 @@ interface IconSvgProps {
     size: number;
 }
 
-function IconSvg({ name, size }: IconSvgProps) {
+function IconSvg({ name }: IconSvgProps) {
     if (name === 'terminal') {
-        return <Icon name="tabler:terminal-2" width={size} height={size} />;
+        return <Icon name="tabler:terminal-2" width="18" height="18" />;
     }
 
     if (name === 'lock') {
-        return <Icon name="tabler:lock" width={size} height={size} />;
+        return <Icon name="tabler:lock" width="18" height="18" />;
     }
 
     if (name === 'zap') {
-        return <Icon name="tabler:bolt" width={size} height={size} />;
+        return <Icon name="tabler:bolt" width="18" height="18" />;
     }
 
     if (name === 'clock') {
-        return <Icon name="tabler:clock" width={size} height={size} />;
+        return <Icon name="tabler:clock" width="18" height="18" />;
     }
 
     if (name === 'message') {
-        return <Icon name="tabler:message" width={size} height={size} />;
+        return <Icon name="tabler:message" width="18" height="18" />;
     }
 
-    return <Icon name="tabler:database" width={size + 2} height={size + 2} />;
+    return <Icon name="tabler:database" width="21" height="21" />;
 }
 
 interface FeatureCardProps {
@@ -38,7 +38,7 @@ function FeatureCard(props: FeatureCardProps) {
     return (
         <a class="feature-card" href={props.href}>
             <span class="feature-icon">
-                <IconSvg name={props.icon} size={18} />
+                <IconSvg name={props.icon} />
             </span>
             <h3>{props.title}</h3>
             <p>{props.description}</p>
