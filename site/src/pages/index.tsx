@@ -24,7 +24,7 @@ function IconSvg({ name, size }: IconSvgProps) {
         return <Icon name="tabler:message" width={size} height={size} />;
     }
 
-    return <Icon name="tabler:database" width={size} height={size} />;
+    return <Icon name="tabler:database" width={size + 2} height={size + 2} />;
 }
 
 interface FeatureCardProps {
