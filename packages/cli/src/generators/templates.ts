@@ -248,8 +248,9 @@ export function configFile(opts: CreateOptions): ScaffoldedFile {
         : opts.db === 'sqlite' || opts.db === 'postgres' || opts.db === 'mysql'
           ? `  DATABASE_URL: z.string().min(1, 'DATABASE_URL is required for the ${opts.db} preset.'),`
           : '';
+  const zImport = dbEnvVar ? ', z' : '';
 
-  const src = `import { defineConfig, defineEnv, defaultEnvSchema, z } from '@adjskit/core';
+  const src = `import { defineConfig, defineEnv, defaultEnvSchema${zImport} } from '@adjskit/core';
 
 const envSchema = defaultEnvSchema.extend({
 ${dbEnvVar}
@@ -309,7 +310,6 @@ import {
   createCooldownStore,
   createLogger,
   configureCustomIdCodec,
-  defineConfig,
   loadCommands,
   loadComponents,
   loadEvents,
