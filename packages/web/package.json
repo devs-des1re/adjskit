@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "krate dev",
-    "build": "krate build",
+    "build": "krate build && node scripts/fix-code-blocks.mjs",
     "serve": "krate serve",
     "preview": "krate serve",
     "test:docs": "krate build"

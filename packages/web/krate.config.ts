@@ -5,7 +5,7 @@ export default defineConfig({
   outDir: 'dist',
   pagesDir: 'src/pages',
   publicDir: 'public',
-  minify: true,
+  minify: false,
 
   devServer: {
     port: 3000,

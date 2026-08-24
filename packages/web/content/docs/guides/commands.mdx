@@ -42,17 +42,17 @@ Set `prefix: null` in config to disable prefix commands entirely (slash-only bot
 
 `.addParam(name, type, opts)` supports:
 
-| ParamType               | Resolved value          |
-| ----------------------- | ----------------------- |
-| `ParamType.String`      | `string`                |
-| `ParamType.Integer`     | `number`                |
-| `ParamType.Number`      | `number` (float)        |
-| `ParamType.Boolean`     | `boolean`               |
-| `ParamType.User`        | `User`                  |
-| `ParamType.Channel`     | `GuildBasedChannel`     |
-| `ParamType.Role`        | `Role`                  |
-| `ParamType.Mentionable` | `User \| Role`          |
-| `ParamType.Attachment`  | `Attachment`            |
+| ParamType               | Resolved value      |
+| ----------------------- | ------------------- |
+| `ParamType.String`      | `string`            |
+| `ParamType.Integer`     | `number`            |
+| `ParamType.Number`      | `number` (float)    |
+| `ParamType.Boolean`     | `boolean`           |
+| `ParamType.User`        | `User`              |
+| `ParamType.Channel`     | `GuildBasedChannel` |
+| `ParamType.Role`        | `Role`              |
+| `ParamType.Mentionable` | `User \| Role`      |
+| `ParamType.Attachment`  | `Attachment`        |
 
 Slash commands read directly from interaction options. Prefix commands **auto-fix** tokens: mentions/ids are resolved from cache, then via a fetch fallback, then by name — always yielding the same objects slash commands give you. The last `string` param consumes the remaining tokens (`args._raw` / `args._rest` are available on prefix).
 
