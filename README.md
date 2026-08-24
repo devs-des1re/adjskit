@@ -7,6 +7,7 @@
 [![node](https://img.shields.io/node/v/%40adjskit/core.svg?logo=node.js&logoColor=white)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier&logoColor=white)](https://prettier.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A batteries-included framework and scaffolding CLI for building [discord.js](https://discord.js.org) v14 bots — unified prefix & slash commands, interactive components with safe custom ids, database-backed cooldowns, and fully customizable error messages.
 
@@ -78,3 +79,7 @@ pnpm smoke       # scaffold a local bot wired to the built core
 ## Documentation
 
 Guides live in [`docs/`](docs): [commands](docs/commands.mdx), [components](docs/components.mdx), [events](docs/events.mdx), [configuration](docs/config.mdx), [database](docs/database.mdx), and the [CLI](docs/cli.mdx).
+
+## License
+
+[MIT](LICENSE) © Arjun Patel
