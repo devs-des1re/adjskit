@@ -1,6 +1,6 @@
 {
   "name": "adjskit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI to scaffold and manage discord.js bot projects built on @adjskit/core.",
   "keywords": [
     "discord",
