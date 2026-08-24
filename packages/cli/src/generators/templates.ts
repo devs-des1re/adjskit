@@ -1,3 +1,4 @@
+import { defaultMessages } from '@adjskit/core';
 import { toJs, ext } from '../utils.js';
 import type { CreateOptions, DatabasePreset, Lang, ScaffoldedFile } from '../types.js';
 
@@ -250,6 +251,10 @@ export function configFile(opts: CreateOptions): ScaffoldedFile {
           : '';
   const zImport = dbEnvVar ? ', z' : '';
 
+  const messagesLines = Object.entries(defaultMessages).map(
+    ([key, value]) => `    ${key}: ${JSON.stringify(value)},`,
+  );
+
   const src = `import { defineConfig, defineEnv, defaultEnvSchema${zImport} } from '@adjskit/core';
 
 const envSchema = defaultEnvSchema.extend({
@@ -262,6 +267,10 @@ export const config = defineConfig({
   env,
   prefix: ${opts.prefix === null ? 'null' : `'${opts.prefix}'`},
   cooldownBackend: ${cooldownBackend(opts.db)},
+  // Customize any of these error messages (supports {variable} placeholders).
+  messages: {
+${messagesLines.join('\n')}
+  },
 });
 `;
   return { path: `src/config${ext(opts.lang)}`, content: render(src, opts.lang) };

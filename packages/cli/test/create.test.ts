@@ -114,6 +114,12 @@ describe('create scaffolds every preset in TS and JS', () => {
         const ping = readFileSync(join(targetDir, `src/commands/ping${e}`), 'utf8');
         expect(ping).toContain("createCommand('ping')");
 
+        // config materializes all customizable error messages
+        const config = readFileSync(join(targetDir, `src/config${e}`), 'utf8');
+        expect(config).toContain('messages:');
+        expect(config).toContain('commandCooldown:');
+        expect(config).toContain('guardOwnerOnly:');
+
         // JS output must be type-stripped (no `import type`)
         if (lang === 'js') {
           const index = readFileSync(join(targetDir, `src/index${e}`), 'utf8');

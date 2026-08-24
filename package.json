@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,js,json,md,yml,yaml}\"",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "pnpm --filter @adjskit/core build && pnpm -r typecheck",
     "clean": "pnpm -r clean",
     "smoke": "node scripts/smoke.mjs"
   },
