@@ -2,7 +2,28 @@
   "name": "adjskit",
   "version": "0.1.0",
   "description": "CLI to scaffold and manage discord.js bot projects built on @adjskit/core.",
+  "keywords": [
+    "discord",
+    "discord-js",
+    "discord.js",
+    "bot",
+    "cli",
+    "scaffolding",
+    "generator",
+    "framework",
+    "typescript"
+  ],
+  "homepage": "https://github.com/devs-des1re/adjskit#readme",
+  "bugs": {
+    "url": "https://github.com/devs-des1re/adjskit/issues"
+  },
   "license": "MIT",
+  "author": "Arjun Patel (devs-des1re)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devs-des1re/adjskit.git",
+    "directory": "packages/cli"
+  },
   "type": "module",
   "bin": {
     "adjskit": "./dist/index.js"

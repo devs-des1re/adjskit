@@ -2,7 +2,30 @@
   "name": "@adjskit/core",
   "version": "0.1.0",
   "description": "Runtime framework for adjskit discord.js bots.",
+  "keywords": [
+    "discord",
+    "discord-js",
+    "discord.js",
+    "bot",
+    "framework",
+    "commands",
+    "slash-commands",
+    "components",
+    "modals",
+    "cooldowns",
+    "typescript"
+  ],
+  "homepage": "https://github.com/devs-des1re/adjskit#readme",
+  "bugs": {
+    "url": "https://github.com/devs-des1re/adjskit/issues"
+  },
   "license": "MIT",
+  "author": "Arjun Patel (devs-des1re)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devs-des1re/adjskit.git",
+    "directory": "packages/core"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
