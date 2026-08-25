@@ -8,11 +8,11 @@ export default defineConfig({
   description:
     'A discord.js v14 framework with unified slash + prefix commands, signed components, typed events, cooldowns, and database presets.',
 
-  base,
+  base: '/',
   srcDir: 'content',
   outDir: 'dist',
   cleanUrls: true,
-  sitemap: { hostname: 'https://adjskit.pages.dev' },
+  sitemap: { hostname: 'https://adjskit.js.org' },
 
   themeConfig: {
     siteTitle: 'adjskit',
